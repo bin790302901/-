@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jquery 动态添加元素，动态移除,循环取值</title>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+        .span_c {
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="button" id="idbt" value="添加" style="width: 100px; height: 30px;" />
+    </div>
+    <div id="divinfo1">
+
+    </div>
+    <div id="divinfo2" style="display: none">
+        <div class="content_div">
+            <span class="span_c">姓名：</span>
+            <select class="select_name">
+                <option value="1">--请选择--</option>
+                <option value="2">张三</option>
+                <option value="3">李四</option>
+            </select>
+            <span class="span_c">性别：</span>
+            <select class="select_sex">
+                <option value="1">--请选择--</option>
+                <option value="2">男</option>
+                <option value="3">女</option>
+            </select>
+            <span class="span_c">性别：</span>
+            <select class="select_age">
+                <option value="1">--请选择--</option>
+                <option value="2">18</option>
+                <option value="3">19</option>
+            </select>
+            <input type="button" style="width: 60px; height: 25px;" value="移除" onclick="remove(this)" />
+        </div>
+    </div>
+<div>
+    <input type="button" id="savebt" value="获取值" style="width: 100px; height: 30px;" />
+
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idbt").bind("click",
+            function () {
+                $("#divinfo1").append($("#divinfo2").html());
+
+            });
+
+      
+        //获取列表中所选值
+        $("#savebt").bind("click", function () {
+            var parmstr = "";
+                $("#divinfo1 .content_div").each(function() {
+                    
+                    var name = $(this).find("select.select_name option:selected").text();
+                    var sex = $(this).find("select.select_sex option:selected").text();
+                    var age = $(this).find("select.select_age option:selected").text();
+
+                    
+                    parmstr += name + "," + sex + "," + age + "|";
+                });
+
+                alert(parmstr);
+
+        });
+         
+    });
+    //移除
+    function remove(obj) {
+        $(obj).parent().remove();
+    }
+
+
+</script>
